@@ -1,0 +1,50 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<header>
+	<nav>
+		<!-- <div id="logo">
+			<h2><a href="/">{SITE_TITLE}</a></h2>
+			<p><i>Home of Vancouver's oldest cob shed!</i></p>
+		</div> -->
+		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+		<img src="public/moby.svg"/>
+
+
+
+	</nav>
+</header>
+<style>
+
+
+	header {
+		margin: 0;
+		padding: 0 1em;
+		background: white;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+	h2 {
+		margin: 0;
+		font-size: 1em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+	}
+	nav {
+		width:100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: .5em;
+	}
+
+	img{
+		display:block;
+	}
+
+</style>
