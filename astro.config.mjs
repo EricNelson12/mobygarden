@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://enelson12.github.io',
+	// base: 'moby',
 	integrations: [mdx(), sitemap()],
 });

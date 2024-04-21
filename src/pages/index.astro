@@ -1,8 +1,13 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -13,33 +18,148 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
+			<nav id="filters">
+				<button data-filter-posts="all">All</button>
+				<button data-filter-posts="notice">Notices</button>
+				<button data-filter-posts="news">News</button>
+				<button data-filter-posts="events">Events</button>
+				<button data-filter-posts="tools">Tools</button>
+				<button data-filter-posts="tools">About</button>
+			</nav>
+			<section>
+				<ul>
+					{
+						posts.map((post) => (
+							<li data-post-type={post.data.pubType}>
+								<a href={`/blog/${post.slug}/`}>
+									<h4 class="title">{post.data.title}</h4>
+								</a>
 
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+								<p class="date">
+									{post.data.pubDate.toLocaleDateString(
+										"en-us",
+										{
+											year: "numeric",
+											month: "short",
+											day: "numeric",
+										},
+									)}
+								</p>
+							</li>
+						))
+					}
+				</ul>
+			</section>
 		</main>
 		<Footer />
+		<script>
+			const buttons = document.querySelectorAll("button");
+
+			buttons.forEach((button) => {
+				button.addEventListener("click", (e) => {
+					const fiterButtonElem = e.target as HTMLElement;
+					const filter =
+						fiterButtonElem.getAttribute("data-filter-posts");
+
+					// Make this filter button underlined:
+					fiterButtonElem.style.textDecoration = "underline";
+
+					// and make the others not underlined:
+					buttons.forEach((button) => {
+						if (button !== fiterButtonElem) {
+							button.style.textDecoration = "none";
+						}
+					});
+
+					const itemsToShow =
+						filter === "all"
+							? document.querySelectorAll("li")
+							: document.querySelectorAll(
+									`li[data-post-type='${filter}']`,
+								);
+
+					document
+						.querySelectorAll("li")
+						.forEach((li) => li.classList.add("d-none"));
+					itemsToShow.forEach((li) => li.classList.remove("d-none"));
+				});
+			});
+		</script>
+		<style>
+			#filters {
+				display: flex;
+				justify-content: center;
+				margin: 0;
+			}
+
+			#filters button {
+				/* Remove button styling */
+				border: none;
+				background: none;
+				color: #000;
+				cursor: pointer;
+				font-size: 1em;
+				font-weight: 600;
+				margin: 0 1em;
+				padding: 0.6em;
+			}
+
+			@media (max-width: 600px) {
+				#filters button {
+					margin: 0 0.2em; /* Reduced margin */
+					padding: 0.2em; /* Reduced padding */
+				}
+			}
+
+			#filters button:hover {
+				text-decoration: underline;
+			}
+
+			.d-none {
+				display: none;
+			}
+			p {
+				margin: 0em;
+				padding: 0em;
+			}
+
+			a {
+				text-decoration: none;
+				display: inline-block;
+			}
+
+			ul {
+				width: auto;
+				list-style-type: none;
+				padding: 0;
+			}
+
+			li {
+				padding-bottom: 1em;
+				font-family:
+					Open Sans,
+					arial,
+					helvetica,
+					sans-serif;
+			}
+
+			li h4 {
+				color: green;
+				margin: 0;
+				padding: 0;
+				font-size: 20px;
+				font-weight: 600;
+				text-decoration: none;
+				margin-bottom: 0em;
+			}
+			li > time {
+				/* color: var(--color-gray-500); */
+				color: yellow !important;
+				font-size: 0.1em;
+			}
+			li h4:hover {
+				text-decoration: underline;
+			}
+		</style>
 	</body>
 </html>

@@ -1,50 +1,47 @@
----
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
----
-
 <header>
-	<nav>
-		<!-- <div id="logo">
-			<h2><a href="/">{SITE_TITLE}</a></h2>
-			<p><i>Home of Vancouver's oldest cob shed!</i></p>
-		</div> -->
-		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-		<img src="public/moby.svg"/>
-
-
-
-	</nav>
+	<a href="/">
+		<h1>MOBY</h1>
+		<h2>community garden</h2>
+		<p>1737 E 11th Ave</p>
+	</a>
 </header>
 <style>
-
-
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+	#community-garden {
+		font-size: 0.5em;
 	}
 
-	h2 a,
-	h2 a.active {
+	header a {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1em;
 		text-decoration: none;
 	}
-	nav {
-		width:100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: .5em;
+
+	/* Make sure all header children do not have underlines */
+	header a:hover {
+		text-decoration: none;
 	}
 
-	img{
-		display:block;
+	h1 {
+		font-size: 36px;
+		font-weight: bold;
+		color: black;
 	}
-
+	h2 {
+		font-size: 24px;
+		font-weight: normal;
+		color: green;
+	}
+	p {
+		font-size: 18px;
+		color: rgb(25, 71, 25);
+	}
+	h1,
+	h2,
+	p {
+		margin: 0; /* Removes default margins */
+		padding: 0; /* Adds a small padding to keep a bit of spacing */
+		line-height: 1;
+	}
 </style>
