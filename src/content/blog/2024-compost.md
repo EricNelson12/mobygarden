@@ -2,7 +2,7 @@
 title: 'Do You Need More Soil For Your Garden Plot?'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Apr 11 2024'
-pubType: 'notice'
+pubType: 'notices'
 ---
 Hello, Fellow Gardeners.
 As we all know, the planting season is here, and registration is only a few weeks away.

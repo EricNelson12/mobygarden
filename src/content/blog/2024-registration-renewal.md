@@ -2,7 +2,7 @@
 title: 'Registration Renewal'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Apr 10 2024'
-pubType: 'notice'
+pubType: 'notices'
 ---
 
 Hello to all our MOBY Community Garden Members;
@@ -10,7 +10,9 @@ Hello to all our MOBY Community Garden Members;
 Now that Spring has sprung, longer days bring milder weather and a sense of renewal for many of us, which is great for improving our health and well-being.
 
 We will do plot renewals in-person on the following dates and times:
+
 - Saturday, April 27th, 2024, from 12:00 Noon to 2:00 PM
+
 - Sunday, April 28th, 2024, from 12:00 Noon to 2:00 PM
 
 Any plots not renewed by Tuesday, April 30th, 2024, will be open to new gardeners. 

@@ -20,7 +20,7 @@ const posts = (await getCollection("blog")).sort(
 		<main>
 			<nav id="filters">
 				<button data-filter-posts="all">All</button>
-				<button data-filter-posts="notice">Notices</button>
+				<button data-filter-posts="notices">Notices</button>
 				<button data-filter-posts="news">News</button>
 				<button data-filter-posts="events">Events</button>
 				<button data-filter-posts="tools">Tools</button>
@@ -161,6 +161,12 @@ const posts = (await getCollection("blog")).sort(
 			li h4:hover {
 				text-decoration: underline;
 			}
+
+			.date {
+				font-size: 0.8em;
+				color: #666;
+			}
+
 		</style>
 	</body>
 </html>
