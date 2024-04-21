@@ -26,5 +26,5 @@ They provide compost to many local community gardens, Master Gardeners, and the 
 
 - Six wheelbarrows will cover each plot with 3” of compost.
 
-To deliver the Compost by **April 26th or 27th, 2024**, you must respond to Patrick no later than <span style="color:red">**Wednesday, April 24th**</span>.
+To deliver the Compost by  <span style="color:darkgreen">**April 26th or 27th, 2024**</span>, you must respond to Patrick no later than <span style="color:darkgreen">**Wednesday, April 24th**</span>.
 
