@@ -31,6 +31,7 @@ const { title, description, pubDate, updatedDate, heroImage, pubType } =
 
 			}
 			.title {
+				padding-top: .5em;
 				text-align: center;
 			}
 
@@ -63,7 +64,7 @@ const { title, description, pubDate, updatedDate, heroImage, pubType } =
 			<div class="prose">
 				<div class="title">
 					<h1>{title}</h1>
-					<div class="subtitle">
+					<!-- <div class="subtitle">
 						{pubType} | {
 							pubDate.toLocaleDateString("en-us", {
 								year: "numeric",
@@ -71,7 +72,7 @@ const { title, description, pubDate, updatedDate, heroImage, pubType } =
 								day: "numeric",
 							})
 						}
-					</div>
+					</div> -->
 					<hr />
 				</div>
 				<slot />

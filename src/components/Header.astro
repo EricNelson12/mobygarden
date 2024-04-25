@@ -1,13 +1,20 @@
 <header>
-	<a href="/" aria-label="Moby Homepage">
-		<h1>MOBY</h1>
-	</a>
-	<h2>community garden</h2>
-	<p>1737 E 11th Ave</p>
+	<div class="info">
+		<a href="/" aria-label="Moby Homepage">
+			<h1>MOBY</h1>
+		</a>
+		<h2>community garden</h2>
+		<p>1737 E 11th Ave</p>
+	</div>
 </header>
 <style>
 	#community-garden {
 		font-size: 0.5em;
+	}
+
+	.info {
+		padding:1em;
+		background-color: white;
 	}
 
 	header {
@@ -16,6 +23,8 @@
 		align-items: center;
 		padding: 1em;
 		text-decoration: none;
+		/* Set a bakground image to moby_background.webp */
+		background-image: url("/moby.webp");
 	}
 
 	header a {
@@ -46,6 +55,5 @@
 	p {
 		margin: 0; /* Removes default margins */
 		padding: 0; /* Adds a small padding to keep a bit of spacing */
-		line-height: 1;
 	}
 </style>

@@ -1,5 +1,5 @@
 ---
-title: 'Registration Renewal'
+title: 'Online registration Renewal'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Apr 10 2024'
 pubType: 'notices'
