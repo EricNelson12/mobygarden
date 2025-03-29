@@ -1,5 +1,5 @@
 ---
-title: 'In person registration April 27, 28'
+title: 'In person registration'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Apr 21 2024'
 pubType: 'events'

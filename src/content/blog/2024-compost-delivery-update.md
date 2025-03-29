@@ -1,5 +1,5 @@
 ---
-title: 'Still more soil for sale!'
+title: 'More soil for sale'
 description: ''
 pubDate: 'Apr 27 2024'
 pubType: 'notices'

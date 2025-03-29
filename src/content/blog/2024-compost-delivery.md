@@ -1,5 +1,5 @@
 ---
-title: 'Compost delivery April 28th 8:00am'
+title: 'Compost delivery'
 description: ''
 pubDate: 'Apr 26 2024'
 pubType: 'events'
