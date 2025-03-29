@@ -8,6 +8,19 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
 	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 );
+
+// Group posts by year
+const postsByYear = posts.reduce((acc, post) => {
+	const year = post.data.pubDate.getFullYear();
+	if (!acc[year]) {
+		acc[year] = [];
+	}
+	acc[year].push(post);
+	return acc;
+}, {});
+
+// Sort years in descending order
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
 <!doctype html>
@@ -18,72 +31,42 @@ const posts = (await getCollection("blog")).sort(
 	<body>
 		<Header />
 		<main>
-			<nav id="filters">
-				<button data-filter-posts="notices">Notices</button>
-				<button data-filter-posts="events">Events</button>
-				<button data-filter-posts="tools">About</button>
-			</nav>
 			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li data-post-type={post.data.pubType}>
-								
-								<a href={`/blog/${post.slug}/`}>
-									<h4 class="title">{post.data.title}</h4>
-								</a>
-
-								<p class="date">
-									{post.data.pubDate.toLocaleDateString(
-										"en-us",
-										{
-											year: "numeric",
-											month: "short",
-											day: "numeric",
-										},
-									)}
-								</p>
-							</li>
-						))
-					}
-				</ul>
+				{
+					years.map((year) => (
+						<>
+							<h3 class="year-heading">{year}<span class="garden-emoji"></span></h3>
+							<ul>
+								{
+									postsByYear[year].map((post) => (
+										<li>
+											<a href={`/blog/${post.slug}/`}>
+												<h4 class="title">{post.data.title}</h4>
+											</a>
+										</li>
+									))
+								}
+							</ul>
+						</>
+					))
+				}
 			</section>
 		</main>
 		<Footer />
 		<script>
-			const buttons = document.querySelectorAll("button");
+			const gardenEmojis = [
+				'🌱', '🌿', '🌺', '🌹', '🌷', '🌸',
+				'🌼', '🌻', '🍀', '🌾', '🌽', '🍅', '🥕', '🥬', '🥦', '🌶️',
+				'🍆', '🍄', '🌰', '🦊', '🦝', '🦡', '🐿️', '🦔'
+			];
 
-			buttons.forEach((button) => {
-				button.addEventListener("click", (e) => {
-					const fiterButtonElem = e.target as HTMLElement;
-					const filter =
-						fiterButtonElem.getAttribute("data-filter-posts");
-
-					// Make this filter button underlined:
-					fiterButtonElem.style.textDecoration = "underline";
-
-					// and make the others not underlined:
-					buttons.forEach((button) => {
-						if (button !== fiterButtonElem) {
-							button.style.textDecoration = "none";
-						}
-					});
-
-					const itemsToShow =
-						filter === "all"
-							? document.querySelectorAll("li")
-							: document.querySelectorAll(
-									`li[data-post-type='${filter}']`,
-								);
-
-					document
-						.querySelectorAll("li")
-						.forEach((li) => li.classList.add("d-none"));
-					itemsToShow.forEach((li) => li.classList.remove("d-none"));
-				});
+			document.querySelectorAll('.garden-emoji').forEach(span => {
+				const randomEmoji = gardenEmojis[Math.floor(Math.random() * gardenEmojis.length)];
+				span.textContent = ` ${randomEmoji}`;
 			});
 		</script>
 		<style>
+
 			#filters {
 				display: flex;
 				justify-content: center;
@@ -162,6 +145,22 @@ const posts = (await getCollection("blog")).sort(
 			.date {
 				font-size: 0.8em;
 				color: #666;
+			}
+
+			.year-heading {
+				margin: 2em 0 1em 0;
+				color: #666;
+				font-size: 1.2em;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+				gap: 0.5em;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+
+			.garden-emoji {
+				font-size: 1em;
 			}
 
 		</style>
