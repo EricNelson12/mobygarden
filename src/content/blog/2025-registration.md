@@ -13,6 +13,6 @@ We are scheduling the following dates for on-site plot renewals:
 - **Saturday, April 5**: 11am to 1pm
 - **Sunday, April 6**: 11am to 1pm
 
-To speed up the registration process, please complete the registration form that was emailed to you, or contact mobyrevival@gmail.com to be placed on the plot waitlist.
+To speed up the registration process, please complete the registration form that was emailed to you, or contact info@mobygarden.ca to be placed on the plot waitlist.
 
 If you have decided to not renew your plot rental(s) this year, please let us know. We already have a wait list with several names!
