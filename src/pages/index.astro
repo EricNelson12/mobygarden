@@ -21,6 +21,7 @@ const postsByYear = posts.reduce((acc, post) => {
 
 // Sort years in descending order
 const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+
 ---
 
 <!doctype html>
@@ -35,17 +36,20 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 				{
 					years.map((year) => (
 						<>
-							<h3 class="year-heading">{year}<span class="garden-emoji"></span></h3>
+							<h3 class="year-heading">
+								{year}
+								<span class="garden-emoji" />
+							</h3>
 							<ul>
-								{
-									postsByYear[year].map((post) => (
-										<li>
-											<a href={`/blog/${post.slug}/`}>
-												<h4 class="title">{post.data.title}</h4>
-											</a>
-										</li>
-									))
-								}
+								{postsByYear[year].map((post) => (
+									<li>
+										<a href={`/blog/${post.slug}/`}>
+											<h4 class="title">
+												{post.data.title}
+											</h4>
+										</a>
+									</li>
+								))}
 							</ul>
 						</>
 					))
@@ -53,116 +57,117 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 			</section>
 		</main>
 		<Footer />
-		<script>
-			const gardenEmojis = [
-				'🌱', '🌿', '🌺', '🌹', '🌷', '🌸',
-				'🌼', '🌻', '🍀', '🌾', '🌽', '🍅', '🥕', '🥬', '🥦', '🌶️',
-				'🍆', '🍄', '🌰', '🦊', '🦝', '🦡', '🐿️', '🦔'
-			];
-
-			document.querySelectorAll('.garden-emoji').forEach(span => {
-				const randomEmoji = gardenEmojis[Math.floor(Math.random() * gardenEmojis.length)];
-				span.textContent = ` ${randomEmoji}`;
-			});
-		</script>
-		<style>
-
-			#filters {
-				display: flex;
-				justify-content: center;
-				margin: 0;
-			}
-
-			#filters button {
-				/* Remove button styling */
-				border: none;
-				background: none;
-				color: #000;
-				cursor: pointer;
-				font-size: 1em;
-				font-weight: 600;
-				margin: 0 1em;
-				padding: 0.6em;
-			}
-
-			@media (max-width: 600px) {
-				#filters button {
-					margin: 0 0.2em; /* Reduced margin */
-					padding: 0.2em; /* Reduced padding */
-				}
-			}
-
-			#filters button:hover {
-				text-decoration: underline;
-			}
-
-			.d-none {
-				display: none;
-			}
-			p {
-				margin: 0em;
-				padding: 0em;
-			}
-
-			a {
-				text-decoration: none;
-				display: inline-block;
-			}
-
-			ul {
-				width: auto;
-				list-style-type: none;
-				padding: 0;
-			}
-
-			li {
-				padding-bottom: 1em;
-				font-family:
-					Open Sans,
-					arial,
-					helvetica,
-					sans-serif;
-			}
-
-			li h4 {
-				color: green;
-				margin: 0;
-				padding: 0;
-				font-size: 20px;
-				font-weight: 600;
-				text-decoration: none;
-				margin-bottom: 0em;
-			}
-			li > time {
-				/* color: var(--color-gray-500); */
-				color: yellow !important;
-				font-size: 0.1em;
-			}
-			li h4:hover {
-				text-decoration: underline;
-			}
-
-			.date {
-				font-size: 0.8em;
-				color: #666;
-			}
-
-			.year-heading {
-				margin: 2em 0 1em 0;
-				color: #666;
-				font-size: 1.2em;
-				font-weight: 500;
-				display: flex;
-				align-items: center;
-				gap: 0.5em;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-			}
-
-			.garden-emoji {
-				font-size: 1em;
-			}
-
-		</style>
 	</body>
 </html>
+<style>
+
+	#filters {
+		display: flex;
+		justify-content: center;
+		margin: 0;
+	}
+
+	#filters button {
+		border: none;
+		background: none;
+		color: #000;
+		cursor: pointer;
+		font-size: 1em;
+		font-weight: 600;
+		margin: 0 1em;
+		padding: 0.6em;
+	}
+
+	@media (max-width: 600px) {
+		#filters button {
+			margin: 0 0.2em;
+			padding: 0.2em;
+		}
+	}
+
+	#filters button:hover {
+		text-decoration: underline;
+	}
+
+	.d-none {
+		display: none;
+	}
+
+	p {
+		margin: 0em;
+		padding: 0em;
+	}
+
+	a {
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	ul {
+		width: auto;
+		list-style-type: none;
+		padding: 0;
+	}
+
+	li {
+		padding-bottom: 1em;
+		font-family:
+			Open Sans,
+			arial,
+			helvetica,
+			sans-serif;
+	}
+
+	li h4 {
+		color: green;
+		margin: 0;
+		padding: 0;
+		font-size: 20px;
+		font-weight: 600;
+		text-decoration: none;
+		margin-bottom: 0em;
+	}
+
+	li > time {
+		color: yellow !important;
+		font-size: 0.1em;
+	}
+
+	li h4:hover {
+		text-decoration: underline;
+	}
+
+	.date {
+		font-size: 0.8em;
+		color: #666;
+	}
+
+	.year-heading {
+		margin: 2em 0 1em 0;
+		color: #666;
+		font-size: 1.2em;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.garden-emoji {
+		font-size: 1em;
+	}
+</style>
+
+<script>
+	const gardenEmojis = [
+		'🌱', '🌿', '🌺', '🌹', '🌷', '🌸',
+		'🌼', '🌻', '🍀', '🌾', '🌽', '🍅', '🥕', '🥬', '🥦', '🌶️',
+		'🍆', '🍄', '🌰', '🦊', '🦝', '🦡', '🐿️', '🦔'
+	];
+
+	document.querySelectorAll('.garden-emoji').forEach(span => {
+		const randomEmoji = gardenEmojis[Math.floor(Math.random() * gardenEmojis.length)];
+		span.textContent = ` ${randomEmoji}`;
+	});
+</script>
