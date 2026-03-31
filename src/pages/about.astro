@@ -1,0 +1,54 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="About — MOBY Community Garden" description="Learn about MOBY Community Garden." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<h2>About Us</h2>
+				<p>
+					MOBY Community Garden is a shared green space in East Vancouver where neighbours come
+					together to grow food, build community, and connect with the land.
+				</p>
+				<p>
+					Founded by a small group of local residents, the garden has grown into a welcoming place
+					for gardeners of all skill levels. We believe everyone deserves access to fresh food and
+					the joy of growing it.
+				</p>
+				<p>
+					Whether you're an experienced gardener or just getting started, there's a place for you
+					here. Check out our <a href="/">news and updates</a> or <a href="/contact">get in touch</a> to learn more.
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	section {
+		margin-top: 2.5em;
+	}
+
+	h2 {
+		margin-bottom: 0.75em;
+	}
+
+	h3 {
+		margin-top: 1.5em;
+		margin-bottom: 0.5em;
+	}
+
+	p {
+		margin-bottom: 0.6em;
+		font-size: 0.95em;
+	}
+</style>
