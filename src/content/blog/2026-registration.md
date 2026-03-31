@@ -11,7 +11,7 @@ Greetings MOBY gardeners!
 
 Please complete the registration form that was emailed to you before May 1st.
 
-Although we now prefer e-transer, you can also vist us on the following dates for on-site plot renewals:
+Although we now prefer e-transfer, you can also vist us on the following dates for on-site plot renewals:
 
 - Saturday & Sunday, April 11 and 12, 2025 — 11:00 AM to 1:00 PM
 - Saturday & Sunday, April 18 and 19, 2025 — 11:00 AM to 1:00 PM
