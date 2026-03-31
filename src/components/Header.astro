@@ -1,60 +1,92 @@
-<header>
-	<div class="info">
-		<a href="/" aria-label="Moby Homepage">
-			<h1>MOBY</h1>
-		</a>
-		<h2>community garden</h2>
-		<p>1737 E 11th Ave</p>
+<header class="site-header">
+	<div class="container">
+		<div class="header-top">
+			<a href="/" class="site-brand" aria-label="MOBY Community Garden homepage">
+				<img src="/moby.svg" alt="" class="logo" />
+			</a>
+			<nav class="site-nav">
+				<a href="/about">About</a>
+				<a href="/photos">Photos</a>
+				<a href="/contact">Contact</a>
+			</nav>
+		</div>
 	</div>
 </header>
+
 <style>
-	#community-garden {
-		font-size: 0.5em;
+	.site-header {
+		padding: 2em 0 1.5em;
+		border-bottom: 1px solid #e8ebe8;
 	}
 
-	.info {
-		padding:1em;
-		background-color: white;
+	.container {
+		max-width: 750px;
+		margin: 0 auto;
+		padding: 0 1.5em;
+		box-sizing: border-box;
 	}
 
-	header {
+	.header-top {
 		display: flex;
-		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
-		padding: 1em;
-		text-decoration: none;
-		/* Set a bakground image to moby_background.webp */
-		background-image: url("/moby.webp");
+		gap: 1.5em;
 	}
 
-	header a {
-		text-decoration: none;
-		line-height: 1.4em;
-	}
-
-	/* Make sure all header children do not have underlines */
-	header:hover {
+	.site-brand {
+		display: flex;
+		align-items: center;
+		gap: 0.75em;
 		text-decoration: none;
 	}
 
-	h1 {
-		font-size: 36px;
-		font-weight: bold;
-		color: black;
+	.logo {
+		height: 120px;
+		width: auto;
+		display: block;
+		flex-shrink: 0;
 	}
-	h2 {
-		font-size: 24px;
-		font-weight: normal;
-		color: green;
+
+	.site-title {
+		font-family: Open Sans, arial, helvetica, sans-serif;
+		font-size: 1.05em;
+		font-weight: 700;
+		color: #2b913e;
+		line-height: 1.2;
 	}
-	p {
-		font-size: 18px;
-		color: rgb(25, 71, 25);
+
+	.site-nav {
+		display: flex;
+		gap: 1.75em;
+		flex-shrink: 0;
 	}
-	h1,
-	h2,
-	p {
-		margin: 0; /* Removes default margins */
-		padding: 0; /* Adds a small padding to keep a bit of spacing */
+
+	.site-nav a {
+		text-decoration: none;
+		font-family: Open Sans, arial, helvetica, sans-serif;
+		font-size: 0.875em;
+		font-weight: 600;
+		color: #444;
+		transition: color 0.15s;
+	}
+
+	.site-nav a:hover {
+		color: #2b913e;
+	}
+
+@media (max-width: 560px) {
+		.header-top {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.85em;
+		}
+
+		.site-title {
+			font-size: 0.95em;
+		}
+
+		.logo {
+			height: 64px;
+		}
 	}
 </style>

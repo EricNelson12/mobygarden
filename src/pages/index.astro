@@ -142,6 +142,11 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 		color: #666;
 	}
 
+	section {
+		margin-top: 2.5em;
+		text-align: left;
+	}
+
 	.year-heading {
 		margin: 2em 0 1em 0;
 		color: #666;
@@ -166,8 +171,8 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 		'🍆', '🍄', '🌰', '🦊', '🦝', '🦡', '🐿️', '🦔'
 	];
 
-	document.querySelectorAll('.garden-emoji').forEach(span => {
-		const randomEmoji = gardenEmojis[Math.floor(Math.random() * gardenEmojis.length)];
-		span.textContent = ` ${randomEmoji}`;
+	const shuffled = gardenEmojis.sort(() => Math.random() - 0.5);
+	document.querySelectorAll('.garden-emoji').forEach((span, i) => {
+		span.textContent = ` ${shuffled[i % shuffled.length]}`;
 	});
 </script>

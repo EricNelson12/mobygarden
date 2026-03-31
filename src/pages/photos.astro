@@ -1,0 +1,127 @@
+---
+import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const {
+  R2_ACCOUNT_ID,
+  R2_ACCESS_KEY_ID,
+  R2_SECRET_ACCESS_KEY,
+  R2_BUCKET_NAME,
+  R2_PUBLIC_URL,
+} = import.meta.env;
+
+const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "avif", "gif"]);
+
+let photos: string[] = [];
+
+if (R2_ACCOUNT_ID && R2_ACCESS_KEY_ID && R2_SECRET_ACCESS_KEY && R2_BUCKET_NAME && R2_PUBLIC_URL) {
+  const client = new S3Client({
+    region: "auto",
+    endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId: R2_ACCESS_KEY_ID,
+      secretAccessKey: R2_SECRET_ACCESS_KEY,
+    },
+  });
+
+  const response = await client.send(
+    new ListObjectsV2Command({ Bucket: R2_BUCKET_NAME })
+  );
+
+  const publicBase = R2_PUBLIC_URL.replace(/\/$/, "");
+
+  photos = (response.Contents ?? [])
+    .filter((obj) => {
+      const ext = obj.Key?.split(".").pop()?.toLowerCase() ?? "";
+      return IMAGE_EXTENSIONS.has(ext);
+    })
+    .sort((a, b) => {
+      // Newest first by last modified date
+      return (b.LastModified?.getTime() ?? 0) - (a.LastModified?.getTime() ?? 0);
+    })
+    .map((obj) => `${publicBase}/${obj.Key}`);
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Photos — MOBY Community Garden" description="Photos from the MOBY Community Garden" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1 class="page-title">Photos</h1>
+			{photos.length === 0 ? (
+				<p class="empty">No photos yet — check back soon!</p>
+			) : (
+				<div class="photo-grid">
+					{photos.map((url) => (
+						<a href={url} target="_blank" rel="noopener" class="photo-item">
+							<img
+								src={url}
+								alt=""
+								loading="lazy"
+								decoding="async"
+								class="photo-img"
+							/>
+						</a>
+					))}
+				</div>
+			)}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.page-title {
+		margin-top: 1.5em;
+		margin-bottom: 1em;
+		font-size: 1.5em;
+		font-weight: 600;
+		color: #2b913e;
+	}
+
+	.empty {
+		color: #888;
+		font-size: 0.95em;
+		margin-top: 2em;
+	}
+
+	.photo-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.75em;
+		margin-bottom: 3em;
+	}
+
+	.photo-item {
+		display: block;
+		overflow: hidden;
+		border-radius: 8px;
+		background: #f0f0f0;
+		aspect-ratio: 1 / 1;
+	}
+
+	.photo-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 8px;
+		display: block;
+		transition: opacity 0.2s;
+	}
+
+	.photo-item:hover .photo-img {
+		opacity: 0.88;
+	}
+
+	@media (max-width: 480px) {
+		.photo-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

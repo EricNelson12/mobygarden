@@ -1,29 +1,52 @@
 ---
-const today = new Date();
+// Footer.astro
 ---
 
-<footer>
-	<div>
-		<a href="mailto:info@mobygarden.ca">info@mobygarden.ca</a>
-		<p>Growing the community 🌱</p>
-	</div>
+<footer class="footer">
+  <div class="footer-inner">
+    <address>1737 E 11th Ave, Vancouver</address>
+    <a href="mailto:info@mobygarden.ca">info@mobygarden.ca</a>
+  </div>
 </footer>
+
 <style>
-	footer {
-		padding: 2em 1em 2em 1em;
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
+  .footer {
+    border-top: 1px solid #e5e5e5;
+    padding: 1.5rem 1rem;
+    background: #fafafa;
+  }
+
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  address {
+    font-style: normal;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  a {
+    font-size: 0.8rem;
+    color: #333;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* mobile stack */
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
 </style>

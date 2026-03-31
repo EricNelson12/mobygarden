@@ -1,0 +1,47 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Contact — MOBY Community Garden" description="Get in touch with MOBY Community Garden." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<h2>Contact</h2>
+				<p>Have a question or want to get involved? Reach out to us.</p>
+				<p>
+					<a href="mailto:info@mobygarden.ca">info@mobygarden.ca</a>
+				</p>
+				<p class="address">1737 E 11th Ave, Vancouver, BC</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	section {
+		margin-top: 2.5em;
+	}
+
+	h2 {
+		margin-bottom: 0.75em;
+	}
+
+	p {
+		margin-bottom: 0.6em;
+		font-size: 0.95em;
+	}
+
+	.address {
+		color: #aaa;
+		font-size: 1em;
+		margin-top: 1.5em;
+	}
+</style>
