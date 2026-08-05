@@ -1,0 +1,70 @@
+---
+import { shouldShowUpcoming } from "../utils/eventStatus.js";
+
+const { eventDate, eventTime, pubType, className = "" } = Astro.props;
+const isEvent = pubType === "events";
+const eventDateValue = eventDate ? eventDate.toISOString() : "";
+const isUpcoming = isEvent && shouldShowUpcoming(eventDate, eventTime, new Date());
+---
+
+{isEvent && isUpcoming && (
+	<span
+		class:list={["event-status-pill", className]}
+		data-event-date={eventDateValue}
+		data-event-time={eventTime ?? ""}
+		data-event-status
+		aria-live="polite"
+	>
+		Upcoming
+	</span>
+)}
+
+<script type="module">
+	import { shouldShowUpcoming } from "../utils/eventStatus.js";
+
+	const statusElements = document.querySelectorAll("[data-event-status]");
+	const now = new Date();
+
+	statusElements.forEach((element) => {
+		const eventDate = element.getAttribute("data-event-date");
+		const eventTime = element.getAttribute("data-event-time");
+		const isUpcoming = shouldShowUpcoming(eventDate, eventTime, now);
+
+		element.classList.toggle("is-upcoming", isUpcoming);
+		if (!isUpcoming) {
+			element.remove();
+		}
+	});
+</script>
+
+<style>
+	.event-status-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.2rem 0.6rem;
+		margin-left: 0.5rem;
+		border: 1px solid rgba(84, 84, 84, 0.25);
+		border-radius: 999px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		opacity: 0.85;
+		vertical-align: middle;
+		line-height: 1.2;
+	}
+
+	.event-status-pill::before {
+		content: "●";
+		font-size: 0.6rem;
+		color: rgb(var(--accent));
+	}
+
+	.event-status-pill.is-upcoming {
+		border-color: rgba(var(--accent), 0.35);
+		color: rgb(var(--accent));
+		opacity: 1;
+	}
+</style>

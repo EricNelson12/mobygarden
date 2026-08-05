@@ -1,5 +1,5 @@
 ---
-title: "2026 Registration"
+title: "Registration"
 pubDate: "2026-03-23"
 author: "Eric Nelson"
 description: "Important information about plot registration for the 2026 gardening season at MOBY Community Garden"

@@ -2,6 +2,7 @@
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import EventStatus from "../../components/EventStatus.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 
@@ -54,6 +55,16 @@ const posts = (await getCollection("blog")).sort(
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.post-type {
+				margin: 0 0 0.4rem;
+				font-size: 0.8rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: rgb(var(--accent));
 			}
 			.date {
 				margin: 0;
@@ -99,6 +110,13 @@ const posts = (await getCollection("blog")).sort(
 										alt=""
 									/>
 									<h2 class="title">{post.data.title}</h2>
+									{post.data.pubType === "events" && (
+										<EventStatus
+											eventDate={post.data.eventDate}
+											eventTime={post.data.eventTime}
+											pubType={post.data.pubType}
+										/>
+									)}
 									<p class="date">
 										{post.data.pubDate.toLocaleDateString(
 											"en-us",

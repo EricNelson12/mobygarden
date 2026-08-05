@@ -11,6 +11,8 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
 		pubType: z.enum(['notices', 'news', 'events']),
+		eventDate: z.coerce.date().optional(),
+		eventTime: z.string().optional(),
 	}),
 });
 

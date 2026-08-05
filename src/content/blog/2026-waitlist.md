@@ -1,5 +1,5 @@
 ---
-title: "2026 Waitlist"
+title: "Waitlist"
 pubDate: "2026-03-25"
 author: "Eric Nelson"
 description: "Information about the waitlist"
