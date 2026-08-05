@@ -1,5 +1,5 @@
 ---
-import { shouldShowUpcoming } from "../utils/eventStatus.js";
+import { shouldShowUpcoming } from "/src/utils/eventStatus.js";
 
 const { eventDate, eventTime, pubType, className = "" } = Astro.props;
 const isEvent = pubType === "events";
@@ -20,7 +20,7 @@ const isUpcoming = isEvent && shouldShowUpcoming(eventDate, eventTime, new Date(
 )}
 
 <script type="module">
-	import { shouldShowUpcoming } from "../utils/eventStatus.js";
+	import { shouldShowUpcoming } from "/src/utils/eventStatus.js";
 
 	const statusElements = document.querySelectorAll("[data-event-status]");
 	const now = new Date();
