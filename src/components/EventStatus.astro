@@ -1,37 +1,71 @@
 ---
-import { shouldShowUpcoming } from "/src/utils/eventStatus.js";
-
 const { eventDate, eventTime, pubType, className = "" } = Astro.props;
 const isEvent = pubType === "events";
 const eventDateValue = eventDate ? eventDate.toISOString() : "";
-const isUpcoming = isEvent && shouldShowUpcoming(eventDate, eventTime, new Date());
 ---
 
-{isEvent && isUpcoming && (
+{isEvent && eventDateValue && (
 	<span
 		class:list={["event-status-pill", className]}
 		data-event-date={eventDateValue}
 		data-event-time={eventTime ?? ""}
 		data-event-status
 		aria-live="polite"
+		hidden
 	>
 		Upcoming
 	</span>
 )}
 
-<script type="module">
-	import { shouldShowUpcoming } from "/src/utils/eventStatus.js";
+<script>
+	/** @param {string | null} value */
+	function parseEventTime(value) {
+		if (!value) return null;
 
-	const statusElements = document.querySelectorAll("[data-event-status]");
+		const match = value.trim().match(/^(\d{1,2}):(\d{2})\s*(am|pm)$/i);
+		if (!match) return null;
+
+		let hours = Number.parseInt(match[1], 10);
+		const minutes = Number.parseInt(match[2], 10);
+		const meridiem = match[3].toLowerCase();
+
+		if (meridiem === "pm" && hours < 12) hours += 12;
+		if (meridiem === "am" && hours === 12) hours = 0;
+
+		return { hours, minutes };
+	}
+
+	/**
+	 * @param {string | null} eventDate
+	 * @param {string | null} eventTime
+	 * @param {Date} now
+	 */
+	function shouldShowUpcoming(eventDate, eventTime, now) {
+		if (!eventDate) return false;
+
+		const parsedDate = new Date(eventDate);
+		if (Number.isNaN(parsedDate.getTime())) return false;
+
+		const parsedTime = parseEventTime(eventTime);
+		if (!parsedTime) {
+			return parsedDate.getTime() > now.getTime();
+		}
+
+		const eventDateTime = new Date(parsedDate);
+		eventDateTime.setHours(parsedTime.hours, parsedTime.minutes, 0, 0);
+		return eventDateTime.getTime() > now.getTime();
+	}
+
 	const now = new Date();
 
-	statusElements.forEach((element) => {
+	document.querySelectorAll("[data-event-status]").forEach((element) => {
 		const eventDate = element.getAttribute("data-event-date");
 		const eventTime = element.getAttribute("data-event-time");
-		const isUpcoming = shouldShowUpcoming(eventDate, eventTime, now);
 
-		element.classList.toggle("is-upcoming", isUpcoming);
-		if (!isUpcoming) {
+		if (shouldShowUpcoming(eventDate, eventTime, now)) {
+			element.removeAttribute("hidden");
+			element.classList.add("is-upcoming");
+		} else {
 			element.remove();
 		}
 	});
